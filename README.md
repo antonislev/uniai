@@ -51,3 +51,19 @@ A chatbot application that can answer questions about the BMW X1 manual using LL
    ```
    docker-compose down
    ```
+### Step 6: Test the API
+
+**Using PowerShell (Windows Terminal):**
+
+- **Chat endpoint** (expects a JSON array in the body):
+  ```powershell
+  # Prepare a JSON array of message objects
+  $messages = @(
+    @{ role = 'user'; content = 'Hello!' }
+  ) | ConvertTo-Json -Depth 3
+
+  Invoke-RestMethod `
+    -Uri http://localhost:8000/chat `
+    -Method Post `
+    -ContentType 'application/json' `
+    -Body $messages
